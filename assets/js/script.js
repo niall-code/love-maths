@@ -91,22 +91,32 @@ function checkAnswer() {
   let calculatedAnswer = calculateCorrectAnswer();
   let isCorrect = userAnswer === calculatedAnswer[0];
 
-  // Feedback whether correct or incorrect
+  // Feedback whether correct or incorrect and change score counts
   if (isCorrect) {
     alert("Well done. That's the right answer.");
+    incrementScore();
   } else {
     alert(`Sorry, ${userAnswer} wasn't the right answer.
     The answer was ${calculatedAnswer[0]}.`);
+    incrementWrongAnswer();
   }
 
   // New game
   runGame(calculatedAnswer[1]);
 }
 
+/**
+ * Gets current score from DOM and adds 1
+*/
 function incrementScore() {
-
+  let oldScore = parseInt(document.getElementById('score').innerText);
+  document.getElementById('score').innerText = ++oldScore;
 }
 
+/**
+ * Gets current incorrect answers tally from DOM and adds 1
+*/
 function incrementWrongAnswer() {
-
+  let oldScore = parseInt(document.getElementById('incorrect').innerText);
+  document.getElementById('incorrect').innerText = ++oldScore;
 }
