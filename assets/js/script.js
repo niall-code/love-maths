@@ -44,14 +44,30 @@ function runGame(gameType) {
   // Begin selected game mode; show first or next question
   if (gameType === 'addition') {
     displayAdditionQuestion(num1, num2);
+
   } else if (gameType === 'subtract') {
     displaySubtractQuestion(num1, num2);
+
   } else if (gameType === 'multiply') {
     displayMultiplyQuestion(num1, num2);
+
   } else if (gameType === 'division') {
-    displayDivisionQuestion(num1, num2);
-  } else {
+
+    /* If the random numbers cannot be divided with a whole number as their result,
+    they will be regenerated until they can.
+
+    If a pair of numbers can be found in the same times table,
+    dividing the larger number by the smaller one will result in an integer
+    - which, when divided by 1, will leave no remainder. */
+
+    while (((num1 / num2) % 1) !== 0 && ((num2 / num1) % 1) !== 0) {
+      num1 = Math.floor(Math.random() * 25) + 1;
+      num2 = Math.floor(Math.random() * 25) + 1;
+    }
     
+    displayDivisionQuestion(num1, num2);
+
+  } else {
     // Error message
     alert(`Unknown game type: ${gameType}`);
     throw `Unknown game type: ${gameType}. Game stopped`
