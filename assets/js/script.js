@@ -28,8 +28,15 @@ function runGame(gameType) {
   let num1 = Math.floor(Math.random() * 25) + 1;
   let num2 = Math.floor(Math.random() * 25) + 1;
 
+  // Begin selected game mode; show first or next question
   if (gameType === 'addition') {
     displayAdditionQuestion(num1, num2);
+  } else if (gameType === 'subtract') {
+    displaySubtractQuestion(num1, num2);
+  } else if (gameType === 'multiply') {
+    displayMultiplyQuestion(num1, num2);
+  } else if (gameType === 'division') {
+    displayDivisionQuestion(num1, num2);
   } else {
     
     // Error message
@@ -71,9 +78,15 @@ function calculateCorrectAnswer() {
   let operand2 = parseInt(document.getElementById('operand2').innerText);
   let operator = document.getElementById('operator').innerText;
 
+  // Returns answer and "game mode to continue" in an array
   if (operator === '+') {
-    // Returns answer and "game mode to continue" in an array
     return [operand1 + operand2, 'addition'];
+  } else if (operator === '-') {
+    return [operand1 - operand2, 'subtract'];
+  } else if (operator === 'x') {
+    return [operand1 * operand2, 'multiply'];
+  } else if (operator === '÷') {
+    return [operand1 / operand2, 'division'];
   } else {
 
     // Error message
